@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import warnings
 
-from .constants import CODE_DISTANCES, P_THRESHOLD, SEED
+from .constants import P_THRESHOLD, SEED
 
 
 class StimInterface:

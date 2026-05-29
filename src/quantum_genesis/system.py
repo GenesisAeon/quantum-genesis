@@ -18,8 +18,6 @@ import random
 from datetime import UTC, datetime
 
 from .constants import (
-    GAMMA_QUANTUM,
-    H_STAR,
     K_COHERENCE,
     R_IMPROVEMENT,
     SEED,

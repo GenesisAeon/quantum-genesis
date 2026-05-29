@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import math
 import random
 
 from .constants import SEED, T1_REFERENCE_US, T2_MAX_RATIO
