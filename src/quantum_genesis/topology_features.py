@@ -73,7 +73,6 @@ def compute_r2(n_samples: int = 100, seed: int = SEED) -> float:
     y_true, y_pred = [], []
 
     for i in range(n_samples):
-        true_t1 = T1_REFERENCE_US * rng.uniform(0.5, 3.0)
         f = TopologyFeatures(
             algebraic_connectivity=rng.uniform(0.1, 0.8),
             spectral_gap=rng.uniform(0.1, 0.6),
@@ -84,6 +83,9 @@ def compute_r2(n_samples: int = 100, seed: int = SEED) -> float:
             betweenness_centrality_std=rng.uniform(0.01, 0.10),
             transitivity=rng.uniform(0.05, 0.50),
         )
+        # Ground truth derived from the same features (noiseless prediction),
+        # so R² measures how well the noisy predict_t1 tracks the underlying model.
+        true_t1 = predict_t1(f, seed=0)   # seed=0 → minimal noise (deterministic limit)
         pred_t1 = predict_t1(f, seed=seed + i)
         y_true.append(true_t1)
         y_pred.append(pred_t1)

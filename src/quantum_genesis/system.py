@@ -97,7 +97,8 @@ class QuantumGenesis:
             self._p_error = self._qubit.error_rate
 
             crep = self._crep_calc.compute(self._p_error, t1_us=self._qubit.t1_us)
-            h = self._qubit.coherence_fraction
+            # H(t) = 1 - p_error  (per UTAC mapping in class docstring)
+            h = 1.0 - self._p_error
             h_star = self._qec.h_star
             dh_dt = (h - prev_h) / dt_us
             prev_h = h
@@ -105,7 +106,7 @@ class QuantumGenesis:
             crep_history.append(crep)
             utac_history.append({"H": h, "dH_dt": dh_dt, "H_star": h_star})
 
-            # Phase event: coherence drops below H*
+            # Phase event: error-rate coherence H = 1-p drops below H* = 1-p_th
             if h < h_star and (not self._phase_events or self._phase_events[-1]["cycle"] < cycle - 10):
                 self._phase_events.append({
                     "cycle": cycle,
@@ -137,7 +138,7 @@ class QuantumGenesis:
 
     def get_utac_state(self) -> dict:
         """Return current UTAC state {H, dH_dt, H_star, K_eff}."""
-        h = self._qubit.coherence_fraction
+        h = 1.0 - self._p_error   # H(t) = 1 - p_error per UTAC mapping
         return {
             "H": round(h, 6),
             "dH_dt": 0.0,                          # instantaneous snapshot

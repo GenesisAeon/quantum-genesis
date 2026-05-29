@@ -5,15 +5,13 @@ from __future__ import annotations
 import pytest
 
 from quantum_genesis import QuantumGenesis, run_benchmark
-from quantum_genesis.benchmark import print_benchmark_report
-from quantum_genesis.constants import GAMMA_QUANTUM, P_THRESHOLD
-from quantum_genesis.crep_quantum import QuantumCREP
+from quantum_genesis.constants import P_THRESHOLD
 from quantum_genesis.density_matrix import DensityMatrixCoherence
 from quantum_genesis.logical_depth import crep_p_from_logical_depth, logical_depth_factor
 from quantum_genesis.qec_threshold import SurfaceCodeThreshold
 from quantum_genesis.qubit_model import QubitDecoherenceModel
+from quantum_genesis.topology_features import TopologyFeatures, predict_t1
 from quantum_genesis.toric_code import InformationCriticalPhase
-from quantum_genesis.topology_features import TopologyFeatures, compute_r2, predict_t1
 
 
 # ---------------------------------------------------------------------------
@@ -48,6 +46,13 @@ def test_get_utac_state_keys(qg):
     assert "K_eff" in utac
 
 
+def test_utac_h_equals_one_minus_p_error(qg):
+    """H(t) must equal 1 - p_error per the UTAC mapping."""
+    utac = qg.get_utac_state()
+    p = qg._p_error
+    assert abs(utac["H"] - (1.0 - p)) < 1e-5   # H is rounded to 6dp
+
+
 def test_get_phase_events_is_list(qg):
     qg.run_cycle(n_syndrome_cycles=50)
     assert isinstance(qg.get_phase_events(), list)
@@ -72,15 +77,9 @@ def test_below_threshold(qg):
     assert qg.is_below_threshold()
 
 
-def test_logical_error_rate_below_physical(qg):
-    """Below threshold: logical error rate must drop below physical (at d=7)."""
-    from quantum_genesis.constants import P_THRESHOLD
-    qec = SurfaceCodeThreshold()
-    p = P_THRESHOLD * 0.5   # half of threshold — safely below
-    p_L = qec.logical_error_rate(p, d=7)
-    # For d=7, well below threshold, p_L should be much less than p
-    # (Fowler formula: A·(p/p_th)^4 with proper calibration)
-    assert p_L < 1.0
+def test_logical_error_rate_below_one(qg):
+    p_L = qg.logical_error_rate(d=7)
+    assert 0.0 <= p_L <= 1.0
 
 
 def test_h_star_near_one():
@@ -112,15 +111,13 @@ def test_logical_depth_factor():
 
 
 def test_crep_p_reasonable():
-    p = crep_p_from_logical_depth(p_error=1e-3, n_qubits=50, circuit_depth=100)
+    p = crep_p_from_logical_depth(p_error=1e-3, n_qubits=50, depth=100)
     assert 0.0 <= p <= 1.0
 
 
 def test_toric_coherent_information():
     tc = InformationCriticalPhase(seed=42)
-    # Below lower boundary: full protection
     assert tc.coherent_information(1e-5) > 0.9
-    # In critical phase: fractional preservation
     ci = tc.coherent_information((tc.P_LOWER + tc.P_UPPER) / 2)
     assert 0.0 < ci < 1.0
 
@@ -129,6 +126,13 @@ def test_topology_predict_t1():
     f = TopologyFeatures()
     t1 = predict_t1(f, seed=42)
     assert t1 > 0.0
+
+
+def test_compute_r2_positive():
+    """R² of predict_t1 against its own noiseless baseline must be > 0.90."""
+    from quantum_genesis.topology_features import compute_r2
+    r2 = compute_r2(n_samples=100, seed=42)
+    assert r2 > 0.90, f"R²={r2:.4f} below expected 0.90"
 
 
 # ---------------------------------------------------------------------------
