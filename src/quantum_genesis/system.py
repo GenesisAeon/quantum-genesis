@@ -15,13 +15,12 @@ from __future__ import annotations
 
 import math
 import random
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from .constants import (
     GAMMA_QUANTUM,
     H_STAR,
     K_COHERENCE,
-    P_THRESHOLD,
     R_IMPROVEMENT,
     SEED,
     SIGMA,
@@ -107,7 +106,8 @@ class QuantumGenesis:
             utac_history.append({"H": h, "dH_dt": dh_dt, "H_star": h_star})
 
             # Phase event: error-rate coherence H = 1-p drops below H* = 1-p_th
-            if h < h_star and (not self._phase_events or self._phase_events[-1]["cycle"] < cycle - 10):
+            last_event_far = not self._phase_events or self._phase_events[-1]["cycle"] < cycle - 10
+            if h < h_star and last_event_far:
                 self._phase_events.append({
                     "cycle": cycle,
                     "type": "decoherence_cascade",
@@ -118,7 +118,10 @@ class QuantumGenesis:
                 })
 
         # Summary
-        final_crep = crep_history[-1] if crep_history else self._crep_calc.compute(self._p_error, self._qubit.t1_us)
+        final_crep = (
+            crep_history[-1] if crep_history
+            else self._crep_calc.compute(self._p_error, self._qubit.t1_us)
+        )
         final_utac = utac_history[-1] if utac_history else {}
         result = {
             "n_syndrome_cycles": n_syndrome_cycles,
@@ -196,7 +199,7 @@ class QuantumGenesis:
             ],
             "crep_state": crep,
             "utac_state": utac,
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
         }
 
     # ------------------------------------------------------------------

@@ -10,7 +10,7 @@ from quantum_genesis.density_matrix import DensityMatrixCoherence
 from quantum_genesis.logical_depth import crep_p_from_logical_depth, logical_depth_factor
 from quantum_genesis.qec_threshold import SurfaceCodeThreshold
 from quantum_genesis.qubit_model import QubitDecoherenceModel
-from quantum_genesis.topology_features import TopologyFeatures, predict_t1  # noqa: F401
+from quantum_genesis.topology_features import TopologyFeatures, predict_t1
 from quantum_genesis.toric_code import InformationCriticalPhase
 
 
