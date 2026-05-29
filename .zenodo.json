@@ -1,0 +1,50 @@
+{
+  "title": "quantum-genesis — Package 24: Qubit Decoherence as UTAC Threshold System",
+  "description": "quantum-genesis models superconducting qubit decoherence as a Unified Threshold Adaptive Criticality (UTAC) system, coupling the Quantum Error Correction (QEC) threshold theorem to the CREP (Coherence–Resonance–Emergence–Poetics) framework. The QEC threshold (p_th ≈ 10⁻³) maps to the UTAC phase transition point H*. Calibrated against Google Willow 2024 (below-threshold QEC), IBM Quantum T1 data, npj Quantum Information 2026 (R² > 0.96 for T1 from topology), and Vijay & Lee 2026 (information critical phase in decohered Toric codes). Central result: Γ_quantum ≈ 0.050, placing qubits as the most fragile UTAC system in the GenesisAeon Entropy Atlas, just above solar magnetic fields (P21, Γ ≈ 0.014). Part of the GenesisAeon Entropy Atlas (Packages 17–30).",
+  "version": "0.1.0",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "MIT",
+  "creators": [
+    {
+      "name": "Römer, Johann",
+      "affiliation": "MOR Research Collective"
+    }
+  ],
+  "keywords": [
+    "quantum decoherence",
+    "UTAC",
+    "CREP criticality",
+    "surface code",
+    "QEC threshold",
+    "toric code",
+    "information critical phase",
+    "superconducting qubits",
+    "Google Willow",
+    "entropy atlas",
+    "GenesisAeon",
+    "self-organised criticality",
+    "logical depth"
+  ],
+  "related_identifiers": [
+    {
+      "relation": "isDocumentedBy",
+      "identifier": "10.5281/zenodo.19645351",
+      "resource_type": "publication-whitepaper"
+    },
+    {
+      "relation": "isSupplementTo",
+      "identifier": "10.1007/s10701-025-00883-w",
+      "resource_type": "publication-article",
+      "scheme": "doi"
+    },
+    {
+      "relation": "isSupplementTo",
+      "identifier": "10.1038/s41534-026-01199-x",
+      "resource_type": "publication-article",
+      "scheme": "doi"
+    }
+  ],
+  "language": "eng",
+  "notes": "Synthetic mode (seed=42) requires no quantum hardware. Optional: pip install stim qiskit-ibm-runtime for hardware/simulation backends."
+}
