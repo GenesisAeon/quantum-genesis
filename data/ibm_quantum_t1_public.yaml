@@ -1,0 +1,34 @@
+# IBM Quantum public T1/T2 reference values for quantum-genesis benchmark
+# Source: IBM Quantum Network — publicly available calibration reports
+# Last updated: 2026
+
+metadata:
+  source: IBM Quantum Network (public calibration data)
+  note: >
+    Exact values vary by device and date. These are representative medians
+    from Eagle/Heron processor families as of Q1 2026.
+
+devices:
+  - name: ibm_eagle_r3
+    n_qubits: 127
+    T1_us_median: 180.0
+    T1_us_std: 40.0
+    T2_us_median: 150.0
+    gate_error_1q_median: 2.5e-4
+    gate_error_2q_median: 3.8e-3
+    readout_error_median: 8.0e-3
+
+  - name: ibm_heron_r1
+    n_qubits: 133
+    T1_us_median: 250.0
+    T1_us_std: 55.0
+    T2_us_median: 200.0
+    gate_error_1q_median: 1.2e-4
+    gate_error_2q_median: 2.1e-3
+    readout_error_median: 5.0e-3
+
+utac_mapping:
+  H_coherence: "T1_us_median / T1_us_max"
+  T1_us_max: 1000.0   # next-gen target (UTAC prediction: Gamma → 0.10 at 1 ms)
+  p_error_proxy: "gate_error_2q_median"
+  H_star: 0.999       # 1 - p_threshold

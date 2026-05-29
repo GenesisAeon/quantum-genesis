@@ -1,21 +1,31 @@
 [project]
-name = "diamond-setup"
-version = "1.0.0"
-description = "Universal Python project scaffold â€” generate professional project skeletons in seconds"
+name = "quantum-genesis"
+version = "0.1.0"
+description = "Package 24 — Qubit decoherence as UTAC threshold system (GenesisAeon Entropy Atlas)"
 readme = "README.md"
 license = { text = "MIT" }
-authors = [{ name = "GenesisAeon" }]
+authors = [{ name = "Johann Römer / MOR Research Collective" }]
 requires-python = ">=3.11"
-keywords = ["scaffold", "template", "cli", "project-generator", "skeleton"]
+keywords = [
+    "quantum decoherence",
+    "UTAC",
+    "CREP",
+    "surface code",
+    "QEC threshold",
+    "toric code",
+    "criticality",
+    "entropy atlas",
+    "GenesisAeon",
+    "superconducting qubits",
+]
 classifiers = [
-    "Development Status :: 5 - Production/Stable",
-    "Environment :: Console",
-    "Intended Audience :: Developers",
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
-    "Topic :: Software Development :: Code Generators",
+    "Topic :: Scientific/Engineering :: Physics",
 ]
 dependencies = [
     "typer>=0.12.0",
@@ -25,6 +35,10 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+sim = [
+    "stim>=1.13.0",            # surface code Monte Carlo (optional)
+    "qiskit-ibm-runtime>=0.20",  # IBM Quantum hardware access (optional)
+]
 docs = [
     "mkdocs>=1.6.0",
     "mkdocs-material>=9.5.0",
@@ -38,21 +52,20 @@ dev = [
 ]
 
 [project.scripts]
-diamond = "diamond_setup.cli:app"
+quantum-genesis = "quantum_genesis.cli:app"
 
 [project.urls]
-Homepage = "https://github.com/GenesisAeon/diamond-setup"
-Repository = "https://github.com/GenesisAeon/diamond-setup"
-Documentation = "https://genesisaeon.github.io/diamond-setup"
-Issues = "https://github.com/GenesisAeon/diamond-setup/issues"
-Zenodo = "https://doi.org/10.5281/zenodo.XXXXXXX"
+Homepage = "https://github.com/GenesisAeon/quantum-genesis"
+Repository = "https://github.com/GenesisAeon/quantum-genesis"
+Issues = "https://github.com/GenesisAeon/quantum-genesis/issues"
+Zenodo = "https://doi.org/10.5281/zenodo.19645351"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/diamond_setup"]
+packages = ["src/quantum_genesis", "src/diamond_setup"]
 
 [tool.ruff]
 line-length = 100
@@ -60,14 +73,14 @@ target-version = "py311"
 
 [tool.ruff.lint]
 select = ["E", "F", "B", "I", "W", "UP", "C4", "SIM"]
-ignore = ["B008"]  # typer uses function calls in defaults
+ignore = ["B008"]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**" = ["S101"]  # allow assert in tests
+"tests/**" = ["S101"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "--cov=diamond_setup --cov-report=term-missing -v"
+addopts = "--cov=quantum_genesis --cov-report=term-missing -v"
 
 [tool.coverage.run]
 source = ["src"]
@@ -79,4 +92,3 @@ strict = true
 warn_return_any = true
 warn_unused_configs = true
 ignore_missing_imports = true
-

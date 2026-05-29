@@ -1,0 +1,38 @@
+# Google Willow 2024 benchmark targets for quantum-genesis
+# Source: Google Quantum AI — Nature 2024 + public announcements
+# Reference: Acharya et al. (2024) Nature — Google Willow QEC demonstration
+
+metadata:
+  source: Google Quantum AI (Nature 2024, public data)
+  processor: Google Willow (72-qubit superconducting)
+  milestone: >
+    First demonstration of below-threshold QEC: logical error rate
+    decreases exponentially with code distance.
+
+performance:
+  T1_us_typical: 100.0            # energy relaxation time
+  T2_us_typical: 150.0            # dephasing time
+  gate_error_1q: 1.5e-4
+  gate_error_2q: 5.0e-4           # record as of 2024
+  readout_error: 3.0e-3
+
+qec_results:
+  code: surface_code_rotated
+  threshold_pct: 0.10             # ~10⁻³ physical error rate
+  code_distance_5_logical_error: 1.0e-4
+  code_distance_7_logical_error: 2.0e-5
+  scaling_exponent: 2.14          # d_L below threshold ~ Lambda^d
+
+utac_targets:
+  Gamma_quantum: 0.050
+  H_star: 0.999
+  below_threshold: true
+  info_critical_fraction: 0.25   # Vijay & Lee 2026 prediction
+
+falsifiable_prediction:
+  claim: >
+    As T1 improves toward 1 ms, Gamma_quantum will increase from 0.050
+    toward 0.100, placing quantum systems in the "cellular critical" range
+    (same as apoptosis ATP threshold, Package 25).
+  testable_against: IBM Quantum roadmap milestones (public)
+  horizon: next 2 hardware generations
