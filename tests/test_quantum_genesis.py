@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import pytest
-
 from quantum_genesis import QuantumGenesis, run_benchmark
 from quantum_genesis.constants import P_THRESHOLD
 from quantum_genesis.density_matrix import DensityMatrixCoherence
