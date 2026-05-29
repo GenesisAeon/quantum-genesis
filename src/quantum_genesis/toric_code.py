@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import math
 import random
 
 from .constants import INFO_CRITICAL_FRACTION, P_THRESHOLD, SEED

@@ -10,7 +10,7 @@ from quantum_genesis.density_matrix import DensityMatrixCoherence
 from quantum_genesis.logical_depth import crep_p_from_logical_depth, logical_depth_factor
 from quantum_genesis.qec_threshold import SurfaceCodeThreshold
 from quantum_genesis.qubit_model import QubitDecoherenceModel
-from quantum_genesis.topology_features import TopologyFeatures, predict_t1
+from quantum_genesis.topology_features import TopologyFeatures, predict_t1  # noqa: F401
 from quantum_genesis.toric_code import InformationCriticalPhase
 
 
@@ -78,7 +78,7 @@ def test_below_threshold(qg):
 
 
 def test_logical_error_rate_below_one(qg):
-    p_L = qg.logical_error_rate(d=7)
+    p_L = qg.logical_error_rate(code_distance=7)
     assert 0.0 <= p_L <= 1.0
 
 

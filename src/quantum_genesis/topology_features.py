@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-import math
 import random
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
-from .constants import R2_T1_GRAPH, SEED, T1_REFERENCE_US
+from .constants import SEED
 
 
 @dataclass
@@ -92,5 +91,5 @@ def compute_r2(n_samples: int = 100, seed: int = SEED) -> float:
 
     mean_true = sum(y_true) / n_samples
     ss_tot = sum((y - mean_true) ** 2 for y in y_true)
-    ss_res = sum((yt - yp) ** 2 for yt, yp in zip(y_true, y_pred))
+    ss_res = sum((yt - yp) ** 2 for yt, yp in zip(y_true, y_pred, strict=True))
     return 1.0 - ss_res / ss_tot if ss_tot > 0 else 0.0
