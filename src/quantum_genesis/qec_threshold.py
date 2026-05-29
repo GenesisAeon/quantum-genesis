@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import math
 import random
 
 from .constants import CODE_DISTANCES, P_THRESHOLD, SEED

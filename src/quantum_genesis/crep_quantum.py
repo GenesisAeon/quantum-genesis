@@ -19,7 +19,7 @@ from __future__ import annotations
 
 import math
 
-from .constants import P_THRESHOLD, SIGMA, T1_REFERENCE_US
+from .constants import SIGMA, T1_REFERENCE_US
 from .logical_depth import crep_p_from_logical_depth
 from .qec_threshold import SurfaceCodeThreshold
 

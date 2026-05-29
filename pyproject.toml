@@ -70,6 +70,7 @@ packages = ["src/quantum_genesis", "src/diamond_setup"]
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+src = ["src"]
 
 [tool.ruff.lint]
 select = ["E", "F", "B", "I", "W", "UP", "C4", "SIM"]

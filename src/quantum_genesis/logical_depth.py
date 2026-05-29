@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import math
-
 from .constants import LOGICAL_DEPTH_LD
 
 

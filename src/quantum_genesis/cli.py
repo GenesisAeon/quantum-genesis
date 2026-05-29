@@ -54,5 +54,6 @@ def info() -> None:
 
     console.print(f"[bold]quantum-genesis[/bold] v{__version__}")
     console.print(f"Package ID : {__package_id__}")
-    console.print(f"Γ_quantum  : {GAMMA_QUANTUM:.3f}  (most fragile UTAC system after solar flares)")
+    label = f"Γ_quantum  : {GAMMA_QUANTUM:.3f}  (most fragile UTAC system after solar flares)"
+    console.print(label)
     console.print("DOI        : 10.5281/zenodo.19645351")
