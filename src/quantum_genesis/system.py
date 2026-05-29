@@ -16,6 +16,7 @@ from __future__ import annotations
 import math
 import random
 from datetime import UTC, datetime
+from typing import Any
 
 from .constants import (
     K_COHERENCE,
@@ -65,14 +66,14 @@ class QuantumGenesis:
 
         # Current physical error rate
         self._p_error: float = p_error if p_error is not None else self._qubit.error_rate
-        self._phase_events: list[dict] = []
-        self._cycle_results: list[dict] = []
+        self._phase_events: list[dict[str, Any]] = []
+        self._cycle_results: list[dict[str, Any]] = []
 
     # ------------------------------------------------------------------
     # Diamond contract
     # ------------------------------------------------------------------
 
-    def run_cycle(self, n_syndrome_cycles: int = 1000) -> dict:
+    def run_cycle(self, n_syndrome_cycles: int = 1000) -> dict[str, Any]:
         """
         Simulate n_syndrome_cycles of QEC operation.
 
@@ -82,8 +83,8 @@ class QuantumGenesis:
         self._phase_events.clear()
         dt_us = self._qubit.t_gate_ns * 1e-3   # gate time in µs
 
-        crep_history: list[dict] = []
-        utac_history: list[dict] = []
+        crep_history: list[dict[str, Any]] = []
+        utac_history: list[dict[str, Any]] = []
 
         prev_h = self._qubit.coherence_fraction
 
@@ -133,11 +134,11 @@ class QuantumGenesis:
         self._cycle_results.append(result)
         return result
 
-    def get_crep_state(self) -> dict:
+    def get_crep_state(self) -> dict[str, float]:
         """Return current CREP tensor {C, R, E, P, Gamma}."""
         return self._crep_calc.compute(self._p_error, self._qubit.t1_us)
 
-    def get_utac_state(self) -> dict:
+    def get_utac_state(self) -> dict[str, float]:
         """Return current UTAC state {H, dH_dt, H_star, K_eff}."""
         h = 1.0 - self._p_error   # H(t) = 1 - p_error per UTAC mapping
         return {
@@ -149,11 +150,11 @@ class QuantumGenesis:
             "r": R_IMPROVEMENT,
         }
 
-    def get_phase_events(self) -> list[dict]:
+    def get_phase_events(self) -> list[dict[str, Any]]:
         """Return list of phase transition events (logical error events)."""
         return list(self._phase_events)
 
-    def to_zenodo_record(self) -> dict:
+    def to_zenodo_record(self) -> dict[str, Any]:
         """Serialize current state as a Zenodo-compatible metadata dict."""
         crep = self.get_crep_state()
         utac = self.get_utac_state()

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING, Any
+
 from .constants import (
     GAMMA_QUANTUM,
     INFO_CRITICAL_FRACTION,
@@ -11,7 +13,10 @@ from .constants import (
     T1_REFERENCE_US,
 )
 
-QUANTUM_TARGETS: dict[str, tuple] = {
+if TYPE_CHECKING:
+    from .system import QuantumGenesis
+
+QUANTUM_TARGETS: dict[str, tuple[float, float]] = {
     "qec_threshold_pct":      (0.1,   0.03),   # ~10⁻³ = 0.1%
     "google_willow_t1_us":    (100.0, 0.30),   # ~100 µs T1
     "logical_depth_Ld":       (1.615, 0.05),   # Ibnouhsein 2025
@@ -21,7 +26,7 @@ QUANTUM_TARGETS: dict[str, tuple] = {
 }
 
 
-def run_benchmark(system: object | None = None) -> dict[str, dict]:
+def run_benchmark(system: QuantumGenesis | None = None) -> dict[str, dict[str, Any]]:
     """
     Compare QuantumGenesis outputs against literature targets.
 
@@ -39,12 +44,12 @@ def run_benchmark(system: object | None = None) -> dict[str, dict]:
 
     if system is not None:
         crep = system.get_crep_state()
-        values["gamma_quantum"] = crep.get("Gamma", GAMMA_QUANTUM)
+        values["gamma_quantum"] = float(crep.get("Gamma", GAMMA_QUANTUM))
 
         utac = system.get_utac_state()
-        values["qec_threshold_pct"] = (1.0 - utac.get("H_star", 1 - P_THRESHOLD)) * 100.0
+        values["qec_threshold_pct"] = (1.0 - float(utac.get("H_star", 1 - P_THRESHOLD))) * 100.0
 
-    results = {}
+    results: dict[str, dict[str, Any]] = {}
     for metric, (target, rel_tol) in QUANTUM_TARGETS.items():
         value = values[metric]
         passed = abs(value - target) <= rel_tol + 1e-12  # tolerance is absolute
@@ -58,7 +63,7 @@ def run_benchmark(system: object | None = None) -> dict[str, dict]:
     return results
 
 
-def print_benchmark_report(results: dict[str, dict]) -> None:
+def print_benchmark_report(results: dict[str, dict[str, Any]]) -> None:
     """Pretty-print benchmark results."""
     width = 30
     print(f"\n{'Metric':<{width}} {'Target':>10} {'Value':>10} {'Status':>8}")

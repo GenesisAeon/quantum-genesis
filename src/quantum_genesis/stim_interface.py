@@ -68,7 +68,7 @@ class StimInterface:
         """Fowler et al. 2012 analytic approximation."""
         ratio = p / P_THRESHOLD
         exponent = (d + 1) / 2
-        return min(1.0, 0.1 * ratio**exponent)
+        return float(min(1.0, 0.1 * ratio**exponent))
 
     @property
     def backend(self) -> str:

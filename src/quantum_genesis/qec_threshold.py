@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import random
+from typing import Any
 
 from .constants import CODE_DISTANCES, P_THRESHOLD, SEED
 
@@ -47,7 +48,7 @@ class SurfaceCodeThreshold:
         p_L = A * ratio**exponent
         # Add small shot noise for realism
         p_L *= 1.0 + self._rng.gauss(0, 0.02)
-        return max(0.0, min(1.0, p_L))
+        return float(max(0.0, min(1.0, p_L)))
 
     def is_below_threshold(self, p: float) -> bool:
         return p < self.p_threshold
@@ -59,7 +60,7 @@ class SurfaceCodeThreshold:
             return float("inf")
         return p / p_L
 
-    def threshold_scan(self, p_values: list[float] | None = None) -> list[dict]:
+    def threshold_scan(self, p_values: list[float] | None = None) -> list[dict[str, Any]]:
         """Scan logical error rate across physical error rates for all distances."""
         if p_values is None:
             p_values = [10 ** (-k / 2) for k in range(2, 8)]
