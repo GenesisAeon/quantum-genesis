@@ -166,7 +166,7 @@ class QuantumGenesis:
                 "to the UTAC phase transition H*. Calibrated against Google Willow 2024, "
                 "IBM Quantum T1 data, and npj Quantum Information 2026."
             ),
-            "version": "0.1.0",
+            "version": "1.0.0",
             "upload_type": "software",
             "keywords": [
                 "quantum decoherence",

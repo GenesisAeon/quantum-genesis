@@ -1,6 +1,6 @@
 [project]
 name = "quantum-genesis"
-version = "0.1.0"
+version = "1.0.0"
 description = "Package 24 — Qubit decoherence as UTAC threshold system (GenesisAeon Entropy Atlas)"
 readme = "README.md"
 license = { text = "MIT" }
