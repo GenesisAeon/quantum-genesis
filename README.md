@@ -54,7 +54,7 @@ At threshold → information critical phase (Vijay & Lee 2026): fractional logic
 
 ---
 
-## Install
+## Installation
 
 ```bash
 pip install quantum-genesis
@@ -171,6 +171,14 @@ quantum-genesis/
 > As T1 improves toward 1 ms (next-generation qubits), Γ_quantum will increase from 0.050 toward 0.100, placing quantum systems in the "cellular critical" range — equivalent to the apoptosis ATP threshold (Package 25). Testable against IBM Quantum roadmap milestones (public).
 
 ## Citation
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.PLACEHOLDER.svg)](https://doi.org/10.5281/zenodo.PLACEHOLDER)
+
+DOI will be assigned automatically on first GitHub Release once
+Zenodo–GitHub integration is enabled for this repo. (The whitepaper DOI
+below, `10.5281/zenodo.19645351`, already exists and documents the
+package's scientific model; the software-specific DOI is separate and
+versioned per release.)
 
 ```bibtex
 @software{romer_quantum_genesis_2026,
