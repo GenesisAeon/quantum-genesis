@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "quantum-genesis"
+version: "1.0.0"
+date-released: "2026-06-17"
+authors:
+  - name: "Johann Römer / MOR Research Collective"
+repository-code: "https://github.com/GenesisAeon/quantum-genesis"
+license: MIT
+abstract: "Package 24 — Qubit decoherence as UTAC threshold system (GenesisAeon Entropy Atlas)"
+keywords:
+  - GenesisAeon
+  - UTAC
+  - CREP
+  - open-science
+  - quantum decoherence
+  - surface code
+  - QEC threshold
+  - toric code
