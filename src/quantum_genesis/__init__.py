@@ -11,7 +11,15 @@ References:
 
 from __future__ import annotations
 
-__version__ = "0.1.0"
+from importlib.metadata import PackageNotFoundError
+from importlib.metadata import version as _version
+
+try:
+    __version__ = _version("quantum-genesis")
+except PackageNotFoundError:
+    # Not installed, e.g. running from source.
+    __version__ = "0.0.0+unknown"
+
 __author__ = "Johann Römer / MOR Research Collective"
 __package_id__ = 24
 
