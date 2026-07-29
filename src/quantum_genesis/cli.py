@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import io
 import sys
 
 import typer
@@ -12,8 +13,9 @@ from rich.table import Table
 # letters and micro symbol used throughout this CLI with
 # UnicodeEncodeError. Force UTF-8 stdout/stderr so behavior matches
 # Linux/macOS terminals.
-if hasattr(sys.stdout, "reconfigure"):
+if isinstance(sys.stdout, io.TextIOWrapper):
     sys.stdout.reconfigure(encoding="utf-8")
+if isinstance(sys.stderr, io.TextIOWrapper):
     sys.stderr.reconfigure(encoding="utf-8")
 
 app = typer.Typer(name="quantum-genesis", help="Package 24 — Qubit Decoherence as UTAC System")
