@@ -2,9 +2,19 @@
 
 from __future__ import annotations
 
+import sys
+
 import typer
 from rich.console import Console
 from rich.table import Table
+
+# Windows consoles default to a non-UTF-8 codepage, which breaks the Greek
+# letters and micro symbol used throughout this CLI with
+# UnicodeEncodeError. Force UTF-8 stdout/stderr so behavior matches
+# Linux/macOS terminals.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
 
 app = typer.Typer(name="quantum-genesis", help="Package 24 — Qubit Decoherence as UTAC System")
 console = Console()
@@ -19,7 +29,10 @@ def run(
     """Run a quantum-genesis UTAC simulation cycle."""
     from .system import QuantumGenesis
 
-    console.print(f"[bold]quantum-genesis[/bold] · Package 24 · T1={t1_us} µs · {cycles} cycles")
+    console.print(
+        f"[bold]quantum-genesis[/bold] - Package 24 - T1={t1_us} us - {cycles} cycles",
+        highlight=False,
+    )
     qg = QuantumGenesis(t1_us=t1_us, seed=seed)
     result = qg.run_cycle(n_syndrome_cycles=cycles)
 
@@ -33,9 +46,11 @@ def run(
         table.add_row(k, f"{v:.6f}")
     console.print(table)
 
-    console.print(f"H = {utac.get('H', '?'):.4f}  H* = {utac.get('H_star', '?'):.4f}")
-    console.print(f"Below threshold: {result['below_threshold']}")
-    console.print(f"Phase events: {result['phase_events']}")
+    console.print(
+        f"H = {utac.get('H', '?'):.4f}  H* = {utac.get('H_star', '?'):.4f}", highlight=False
+    )
+    console.print(f"Below threshold: {result['below_threshold']}", highlight=False)
+    console.print(f"Phase events: {result['phase_events']}", highlight=False)
 
 
 @app.command()
@@ -52,8 +67,12 @@ def info() -> None:
     """Show package information and CREP criticality context."""
     from . import GAMMA_QUANTUM, __package_id__, __version__
 
-    console.print(f"[bold]quantum-genesis[/bold] v{__version__}")
-    console.print(f"Package ID : {__package_id__}")
-    label = f"Γ_quantum  : {GAMMA_QUANTUM:.3f}  (most fragile UTAC system after solar flares)"
-    console.print(label)
-    console.print("DOI        : 10.5281/zenodo.19645351")
+    console.print(f"[bold]quantum-genesis[/bold] v{__version__}", highlight=False)
+    console.print(f"Package ID : {__package_id__}", highlight=False)
+    label = f"Gamma_quantum  : {GAMMA_QUANTUM:.3f}  (most fragile UTAC system after solar flares)"
+    console.print(label, highlight=False)
+    console.print("DOI        : 10.5281/zenodo.19645351", highlight=False)
+
+
+if __name__ == "__main__":
+    app()
