@@ -6,7 +6,7 @@
 [![CI](https://github.com/GenesisAeon/quantum-genesis/actions/workflows/ci.yml/badge.svg)](https://github.com/GenesisAeon/quantum-genesis/actions/workflows/ci.yml)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Zenodo](https://img.shields.io/badge/Zenodo-10.5281%2Fzenodo.19645351-lightgrey)](https://doi.org/10.5281/zenodo.19645351)
+[![Zenodo](https://img.shields.io/badge/Zenodo-10.5281%2Fzenodo.20830221-lightgrey)](https://doi.org/10.5281/zenodo.20830221)
 
 **Qubit decoherence as a UTAC threshold system** — Package 24 of the GenesisAeon Entropy Atlas.
 
@@ -172,13 +172,11 @@ quantum-genesis/
 
 ## Citation
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.PLACEHOLDER.svg)](https://doi.org/10.5281/zenodo.PLACEHOLDER)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20830221.svg)](https://doi.org/10.5281/zenodo.20830221)
 
-DOI will be assigned automatically on first GitHub Release once
-Zenodo–GitHub integration is enabled for this repo. (The whitepaper DOI
-below, `10.5281/zenodo.19645351`, already exists and documents the
+The whitepaper DOI above, `10.5281/zenodo.19645351`, documents the
 package's scientific model; the software-specific DOI is separate and
-versioned per release.)
+versioned per release.
 
 ```bibtex
 @software{romer_quantum_genesis_2026,
@@ -187,8 +185,8 @@ versioned per release.)
   year      = {2026},
   publisher = {Zenodo},
   version   = {0.1.0},
-  doi       = {10.5281/zenodo.19645351},
-  url       = {https://doi.org/10.5281/zenodo.19645351}
+  doi       = {10.5281/zenodo.20830221},
+  url       = {https://doi.org/10.5281/zenodo.20830221}
 }
 ```
 

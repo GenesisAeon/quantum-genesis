@@ -73,7 +73,7 @@ def info() -> None:
     console.print(f"Package ID : {__package_id__}", highlight=False)
     label = f"Gamma_quantum  : {GAMMA_QUANTUM:.3f}  (most fragile UTAC system after solar flares)"
     console.print(label, highlight=False)
-    console.print("DOI        : 10.5281/zenodo.19645351", highlight=False)
+    console.print("DOI        : 10.5281/zenodo.20830221", highlight=False)
 
 
 if __name__ == "__main__":

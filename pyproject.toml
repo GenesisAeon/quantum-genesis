@@ -59,7 +59,7 @@ quantum-genesis = "quantum_genesis.cli:app"
 Homepage = "https://github.com/GenesisAeon/quantum-genesis"
 Repository = "https://github.com/GenesisAeon/quantum-genesis"
 Issues = "https://github.com/GenesisAeon/quantum-genesis/issues"
-Zenodo = "https://doi.org/10.5281/zenodo.19645351"
+Zenodo = "https://doi.org/10.5281/zenodo.20830221"
 
 [build-system]
 requires = ["hatchling"]
